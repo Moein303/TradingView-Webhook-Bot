@@ -8,6 +8,7 @@ from handler import send_alert
 import config
 import time
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -43,4 +44,5 @@ def webhook():
 if __name__ == "__main__":
     from waitress import serve
 
-    serve(app, host="0.0.0.0", port=8080)
+    port = int(os.environ.get("PORT", 3000))  # <== read PORT from environment variable
+    serve(app, host="0.0.0.0", port=port)
